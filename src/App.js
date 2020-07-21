@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import logo from './logo512.png';
+import Header from './Header';
 
 function App() {
+
+  const [todoList, setTodoList] = React.useState([
+    'Ir ao supermercado',
+    'Lava a roupa',
+    'Preparar workshop'
+  ]);
+
+  function addItem() {
+    setTodoList([...todoList, `Nova tarefa ${Date.now()}`]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <figure>
+        <img src={logo} />
+      </figure>
+      <h1>Lista de tarefas</h1>
+      <ul>
+        {
+          todoList.map(item => {
+            return (
+              <li key={item}>{item}</li>
+            );
+          })
+        }
+      </ul>
+      <button onClick={addItem}> Adicionar </button>
+      <Header title="Home">
+        <p>Página inicial</p>
+      </Header>
+      <Header title="Produtos" />
+    </>
   );
 }
 
